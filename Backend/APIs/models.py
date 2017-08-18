@@ -6,11 +6,15 @@ from Registration.models import UserModel
 # Create your models here.
 
 class QueryModel(models.Model):
-    key = models.CharField(max_length=10)
+    key = models.CharField(max_length=120)
     query = models.CharField(max_length=10000)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
 
 class TakeupModel(models.Model):
     user = models.ForeignKey(UserModel)
     query = models.ForeignKey(QueryModel)
-    resolved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 

@@ -13,11 +13,9 @@ def SignupView(request):
     print request.body
     if request.method == 'POST':
         data = json.loads(request.body.decode(encoding='UTF-8'))
-        name = data['name']
         username = data['username']
-        email = data['email']
         password = make_password(data['password'])
-        user = UserModel(username=username, name=name, password=password, email=email)
+        user = UserModel(username=username, password=password)
         print user
         user.save()
         resp = {
@@ -41,7 +39,7 @@ def LoginView(request):
 
         if check_password(password, user.password):
             resp = {
-                'code' : 200,
+                'username' : username,
             }
     else:
         resp = {
